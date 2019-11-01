@@ -24,20 +24,20 @@ humans = [
 # Write a list comprehension that creates a list of names of everyone
 # whose name starts with 'D':
 print("Starts with D:")
-a = [person for person in humans if person.name[0].upper() == "D"]
+a = [person.name for person in humans if person.name[0].upper() == "D"]
 print(a)
 
 # Write a list comprehension that creates a list of names of everyone
 # whose name ends in "e".
 print("Ends with e:")
-b = [person for person in humans if person.name.lower().endswith("e")]
+b = [person.name for person in humans if person.name.lower().endswith("e")]
 print(b)
 
 # Write a list comprehension that creates a list of names of everyone
 # whose name starts with any letter between 'C' and 'G' inclusive.
-# print("Starts between C and G, inclusive:")
-# c = [person for person in humans if person.name.lower().startswith(("C", "D"))]
-# print(c)
+print("Starts between C and G, inclusive:")
+c = [person.name for person in humans if person.name[0].lower() in ["c", "d", "e", "f", "g"]]
+print(c)
 
 # Write a list comprehension that creates a list of all the ages plus 10.
 print("Ages plus 10:")
@@ -54,14 +54,14 @@ print(e)
 # age, for example ("David", 31), for everyone between the ages of 27 and 32,
 # inclusive.
 print("Names and ages between 27 and 32:")
-f = tuple([person for person in humans if person.age >= 27 and person.age <= 32])
+f = [(person.name, person.age) for person in humans if person.age >= 27 and person.age <= 32]
 print(f)
 
 # Write a list comprehension that creates a list of new Humans like the old
 # list, except with all the names uppercase and the ages with 5 added to them.
 # The "humans" list should be unmodified.
 print("All names uppercase:")
-g = [(person.name.upper(), person.age + 5) for person in humans]
+g = [Human(person.name.upper(), person.age + 5) for person in humans]
 print(g)
 
 
