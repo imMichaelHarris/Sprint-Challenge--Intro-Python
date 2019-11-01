@@ -7,10 +7,10 @@ class City:
     self.lon = lon
 
   def __str__(self):
-    return f"{self.name}: Lat {self.lat}, Lon {self.lon}"
+    return f"{self.name} {self.lat} {self.lon}"
 
   def __repr__(self):
-    return f"{self.name}: Lat {self.lat}, Lon {self.lon}"
+    return f"{self.name} {self.lat} {self.lon}"
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -31,14 +31,17 @@ def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-    cities_csv = csv.DictReader(open("cities.csv"), delimiter=",")
-    for city in cities_csv:
+  with open("cities.csv", "r") as cities_csv:
+    # cities_csv = csv.reader(open("cities.csv"))
+    reader = csv.reader(cities_csv, delimiter=",")
+    next(reader)
+    # print(cities_csv)
+    for city in reader:
       # print(city)
-      cityObj = City(city["city"], city["lat"], city["lng"])
-      # cityObj = City(city, city.lat)
-      cities.append(cityObj)
+      # print(cityObj)
+      cities.append(City(city[0], float(city[3]), float(city[4])))
       # print(cities)
-    # return cities
+    return cities
 
 cityreader(cities)
 
@@ -84,5 +87,7 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
+  # for city in cities:
+  #   if city.lat == city.lon
 
   return within
